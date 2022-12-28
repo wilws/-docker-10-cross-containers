@@ -1,0 +1,43 @@
+version: "3.8"
+
+services: 
+  nginx:
+    image: 'nginx'
+    ports: 
+      - '80:80'
+    volumes: 
+      - ./www:/var/www/html
+      - ./nginx/conf.d:/etc/nginx/conf.d/
+    
+    depends_on:
+      - php
+      - mysql
+
+  php:
+    build: 
+      context: ./www
+      dockerfile: php.dockerfile
+    
+    ports: 
+      - '9000:9000'
+    
+    volumes:
+      - ./www:/var/www/html      # for automisation 
+      - ./mysql/mysql_sock:/var/run/mysqld 
+
+
+  mysql:
+    platform: linux/x86_64
+    image: mysql
+
+    ports: 
+      - '33267:3306'
+
+    volumes:
+      - ./mysql/data:/var/lib/mysql        # for automisation 
+      - ./mysql/conf:/etc/mysql/conf.d 
+      - ./mysql/mysql_sock:/var/run/mysqld 
+
+    env_file:
+      - ./mysql/.env
+
