@@ -1,9 +1,9 @@
 mysql/*
 !mysql/conf
-
-
-www/env.php
+!mysql/.env
 
 .DS_Store
 **/.DS_Store
 
+vuejs/dist
+vuejs/node_modules

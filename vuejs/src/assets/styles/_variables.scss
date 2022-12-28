@@ -1,0 +1,9 @@
+// font
+
+$primary-font:'Delius', cursive;
+
+@mixin pageSetting {       // Default setting for landing page component "pages/ProductAdd.vue" and "pages/ProductList.vue"
+    position: relative;
+    height:100%;
+    overflow: scroll;
+}
